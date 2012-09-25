@@ -5,6 +5,7 @@ Project is under development. You can find examples of Maven, Spring 3.1, Hibern
 Ertele.net is Turkish project, So no need to write English more!!!
 
 h2. Ertele [Türkçe]
+
 Proje şu an için Maven, Spring MVC ve Hibernate teknolojilerinin kullanımının örneğini teşkil etmekte fakat geliştirmeye devam etmekteyim. 
 
 h3. Ertele.net nedir?
