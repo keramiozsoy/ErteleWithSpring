@@ -1,0 +1,47 @@
+h2. Ertele [Eng]
+
+Project is under development. You can find examples of Maven, Spring 3.1, Hibernate 4.1 on these project. All configuration provided with annotations. 
+
+Ertele.net is Turkish project, So no need to write English more!!!
+
+h2. Ertele [Türkçe]
+Proje şu an için Maven, Spring MVC ve Hibernate teknolojilerinin kullanımının örneğini teşkil etmekte fakat geliştirmeye devam etmekteyim. 
+
+h3. Ertele.net nedir?
+
+Ertele.net, tarayıcınızdan girdiğiniz siteleri daha sonra göz atmak için tarayıcınızda ki butona basarak erteleme listenize almanızı sağlar.
+
+h3. Tarayıcımda yer imlerine kaydederim buna ne gerek var?
+
+Geliştirmekte olduğum android, iphone, ipad uygulamaları ile tarayıcınızdan erteleme listenize aldığınız websayfasını mobil cihazınızdan offline olarak erişebileceksiniz. Örneğin, bilgisayarınızda bir dokuman takip ederken işiniz çıktı gitmeniz gerekiyor! Tek yapmanız gereken ertele butonuna basıp mobil cihazınızdan ister offline ister online okumaya devam etmek.
+
+h3. Proje kodları niçin açık?
+
+Bilmem, belki yarım kalırsa birisi alıp devam etsin diye. Ayrıca j2ee teknolojilerine yeni başlayanlar için örnek proje olsun diye.
+
+h4. Tablo sqlleri:
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `user_name` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `email` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(45) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `read` (
+  `read_id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_url` text CHARACTER SET latin1,
+  `title` text CHARACTER SET latin1,
+  `create_date` datetime DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`read_id`),
+  KEY `FK_USER` (`user_id`),
+  CONSTRAINT `FK_USER` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
