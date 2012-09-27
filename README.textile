@@ -1,6 +1,6 @@
 h2. Ertele [Eng]
 
-Project is under development. You can find examples of Maven, Spring 3.1, Hibernate 4.1 on these project. All configuration provided with annotations. 
+Project is under development. You can find examples of Maven, Spring 3.1, Hibernate 4.1 on this project. All configuration provided with annotations. 
 
 Ertele.net is Turkish project, So no need to write English more!!!
 
