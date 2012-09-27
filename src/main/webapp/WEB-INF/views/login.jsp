@@ -6,6 +6,7 @@
 
 <%@  taglib prefix="c_rt" uri="http://java.sun.com/jstl/core_rt"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c_rt:set var="staticUrl" value="http://s3.amazonaws.com/ertele" />
 	<title>Okuma, video, müzik sayfalarını tek tıkla ertele gitsin | ertele.net</title>
 	
@@ -89,12 +90,12 @@
 <body>
 	
 	<div id="login-box"  align="center">
-		<c_rt:if test="${sessionScope.user != null }">
+		<!--<c_rt:if test="${sessionScope.user != null }">
 			<div class="success">Başarılı bir şekilde giriş yaptınız</div>
 			<script>
 				parent.$.colorbox.close();
 			</script>
-		</c_rt:if>
+		</c_rt:if>-->
 		<c_rt:if test="${errors != null }">
 				<div class="error">
 					<c_rt:forEach var="err" items="${errors}">
@@ -104,18 +105,18 @@
 		</c_rt:if>
 		<div style="color: #fff">Test hesabı için, email:demo@demo.com pass:demo</div>
 		<div id="login-form">
-			<form class="form" action="${pageContext.request.contextPath}/login" method="post">
+		<form:form class="form" action="${pageContext.request.contextPath}/login" method="post" commandName="user">
+			<form:errors path="*" cssClass="error" element="div" />
 				<p class="email">
-					<input type="text" name="email" id="email" />
+					<form:input path="email" id="email"  />
 				</p>
 				<p class="pass">
-					<input type="password" name="password" id="pass" />
+					<form:password path="password" id="pass" />
 				</p>
 				<p class="submit">
 					<input type="submit" value="Giriş" />
 				</p>
-
-			</form>
+		</form:form>
 
 		</div>
 	</div>

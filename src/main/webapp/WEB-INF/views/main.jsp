@@ -5,7 +5,8 @@
 <head>
 	<%@  taglib prefix="c_rt" uri="http://java.sun.com/jstl/core_rt"%>
 	<c_rt:set var="staticUrl" value="http://s3.amazonaws.com/ertele" />
-	<c_rt:set var="isLogin" value="${sessionScope.user != null }" />
+	<!--<c_rt:set var="isLogin" value="${sessionScope.user != null }" />-->
+	<c_rt:set var="isLogin" value="false" />
 	<c_rt:if test="${isLogin }"><c_rt:set var="user" value="${sessionScope.user}" /></c_rt:if>
 	
 	

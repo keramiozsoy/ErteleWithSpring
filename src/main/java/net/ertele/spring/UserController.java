@@ -12,9 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * @author Fatih ISIK
@@ -22,38 +26,40 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 @Controller
+@SessionAttributes("user")
 public class UserController {
 
 	@Autowired
 	private IUserService userService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String mainPage(Locale locale){
 		
 		return "main";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String loginPage(Locale locale){
+	public String loginPage(ModelMap model, Locale locale){
 		
+		model.addAttribute("user", new User());
 		return "login";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginPage(@RequestParam("email") String email, 
-							@RequestParam("password") String password){
+	public String loginPage(@ModelAttribute("user") User user,Errors errors, ModelMap model){
 		
-		User user = userService.findByEmailAndPassword(email, password);
+		user = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
 		if (user == null) {
+			errors.reject("NotFound.user");
 			return "login";
 		}
-		return "main";
+		model.addAttribute(user);
+		return "login";
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String registerPage(ModelMap model){
-		
-		model.addAttribute("user", new User());
+		model.addAttribute(new User());
 		return "register";
 	}
 	
@@ -65,7 +71,11 @@ public class UserController {
 		}
 		// first time we do not use userName
 		user.setUserName(user.getEmail());
-		userService.save(user);
+		try {
+			userService.save(user);
+		} catch (Exception e) {
+			result.addError(new ObjectError("NotFound.user", "user not found"));
+		}
 		return "register";
 	}
 	

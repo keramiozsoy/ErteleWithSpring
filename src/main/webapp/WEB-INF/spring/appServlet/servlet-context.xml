@@ -53,7 +53,6 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
 			<list>
-				<value>net.ertele.spring.domain.Stock</value>
 				<value>net.ertele.spring.domain.User</value>
 				<value>net.ertele.spring.domain.Read</value>
 			</list>

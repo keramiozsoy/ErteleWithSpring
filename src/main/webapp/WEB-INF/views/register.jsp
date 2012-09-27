@@ -91,27 +91,24 @@
 </head>
 <body>
 	<div id="register-box" align="center">
-		<c_rt:if test="${sessionScope.user != null }">
+		<!--<c_rt:if test="${sessionScope.user.email != null }">
 			<div class="success">Başarılı bir şekilde giriş yaptınız</div>
 			<script>
 				parent.$.colorbox.close();
 			</script>
-		</c_rt:if>
+		</c_rt:if>-->
 		<div style="color:#fff">Üye alımı yapılmamaktadır. Test hesabı ile giriş yapabilirsiniz</div>
 		<div id="register-box"><%-- ${pageContext.request.contextPath}/register?t=register --%>
 			<form:form class="form" action="${pageContext.request.contextPath}/register" method="post" commandName="user">
-				<form:errors path="*" cssClass="errorblock" element="div" />
+				<form:errors path="*" cssClass="error" element="div" />
 				<p class="name">
 					<form:input path="fullName" id="name" /><br />
-					<form:errors path="fullName" cssClass="error" />
 				</p>
 				<p class="email">
 					<form:input path="email" id="email" /><br />
-					<form:errors path="email" cssClass="error" />
 				</p>
 				<p class="pass">
 					<form:password path="password" id="password"  /><br />
-					<form:errors path="password" cssClass="error" />
 				</p>
 				<p class="submit">
 					<input type="submit" value="Kaydol" />
